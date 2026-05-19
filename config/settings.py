@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     
     #Local
 
-    'accounts'
+    'accounts',
+    'pages'
 ]
 
 MIDDLEWARE = [
@@ -58,7 +59,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [str(BASE_DIR.joinpath('templates'))],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -128,3 +129,7 @@ STATIC_URL = 'static/'
 # new
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
+
+# config/settings.py
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home' # new
