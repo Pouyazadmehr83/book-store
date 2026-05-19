@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     #Local
-
+    'crispy_forms',
+    'crispy_bootstrap5',
     'accounts',
     'pages'
 ]
@@ -124,7 +125,15 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
-STATIC_URL = 'static/'
+#config/settings.py
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (str(BASE_DIR.joinpath('static')),)
+STATIC_ROOT = str(BASE_DIR.joinpath('staticfiles')) # new
+STATICFILES_FINDERS = [ # new
+  "django.contrib.staticfiles.finders.FileSystemFinder",
+  "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
+
 
 # new
 
@@ -133,3 +142,7 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 # config/settings.py
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home' # new
+
+# django-crispy-forms تنظیمات
+CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'  # <-- جدید
+CRISPY_TEMPLATE_PACK = 'bootstrap5'
