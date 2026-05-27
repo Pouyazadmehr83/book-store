@@ -1,15 +1,19 @@
 # books/views.py
-from django.views.generic import ListView, DetailView # new
+from django.contrib.auth.mixins import LoginRequiredMixin,PermissionRequiredMixin# new
+from django.views.generic import ListView, DetailView
 from .models import Book
 
 
-class BookListView(ListView):
+class BookListView(LoginRequiredMixin, ListView): # new
     model = Book
     context_object_name = 'book_list'
     template_name = 'books/book_list.html'
+    login_url = 'account_login' # new
 
-
-class BookDetailView(DetailView): # new
+class BookDetailView(PermissionRequiredMixin,LoginRequiredMixin, DetailView): # new
     model = Book
-    context_object_name = 'book' # new
+    context_object_name = 'book'
     template_name = 'books/book_detail.html'
+    login_url = 'account_login' # new
+    permission_required = 'books.special_status'
+    
