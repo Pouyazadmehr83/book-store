@@ -14,5 +14,5 @@ COPY requirements.txt /code/requirements.txt
 # Install dependencies with custom mirror
 RUN pip install --no-cache-dir -i https://mirror-pypi.runflare.com/simple -r requirements.txt
 
-# Copy project (تغییر: کل پروژه در /code کپی می‌شود)
+# Copy project 
 COPY . /code/
