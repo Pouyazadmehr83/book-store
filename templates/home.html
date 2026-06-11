@@ -5,6 +5,18 @@
 {% block title %}Home{% endblock title %}
 
 {% block content %}
+<!-- Search Form Section -->
+<div class="container-fluid bg-light py-3 mb-4 border-bottom">
+    <div class="container">
+        <form class="d-flex gap-2" action="{% url 'search_results' %}" method="get">
+            <input name="q" class="form-control form-control-lg rounded-pill" type="text" placeholder="Search books by title or author..." aria-label="Search">
+            <button class="btn btn-primary rounded-pill px-4" type="submit">
+                <i class="bi bi-search"></i> Search
+            </button>
+        </form>
+    </div>
+</div>
+
 <!-- بخش Hero اصلی -->
 <div class="hero-section bg-gradient-primary text-white py-5 mb-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
     <div class="container py-5">
