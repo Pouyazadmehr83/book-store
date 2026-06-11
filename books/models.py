@@ -19,9 +19,14 @@ class Book(models.Model):
     cover = models.ImageField(upload_to='book_covers/', blank=True, null=True)
 
     class Meta:
+        indexes = [
+            models.Index(fields=['id'], name='book_id_index'),
+            models.Index(fields=['title'], name='book_title_index'),
+            models.Index(fields=['author'], name='book_author_index'),
+        ]
         permissions = [
-('special_status', 'Can read all books'),
-]
+            ('special_status', 'Can read all books'),
+        ]
     
 
     def __str__(self):
@@ -52,6 +57,11 @@ class Review(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
+        indexes = [
+            models.Index(fields=['book'], name='review_book_index'),
+            models.Index(fields=['author'], name='review_author_index'),
+            models.Index(fields=['-created_at'], name='review_created_at_index'),
+        ]
         ordering = ['-created_at']  # جدیدترین اول نمایش داده بشه
         unique_together = ['book', 'author']  # هر کاربر فقط یک بار می‌تونه به هر کتاب نظر بده
 

@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'allauth',
     'allauth.account',
+    'debug_toolbar',
     
     # Local apps
     'accounts',
@@ -48,14 +49,17 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -186,3 +190,17 @@ DEFAULT_FROM_EMAIL = 'admin@djangobookstore.com'
 # EMAIL_USE_TLS = env.bool("EMAIL_USE_TLS", default=True)
 # EMAIL_HOST_USER = env("EMAIL_HOST_USER", default="")
 # EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", default="")
+
+# ==================================================
+# CACHE CONFIGURATION
+# ==================================================
+CACHE_MIDDLEWARE_ALIAS = 'default'
+CACHE_MIDDLEWARE_SECONDS = 604800  # 1 week
+CACHE_MIDDLEWARE_KEY_PREFIX = ''
+
+# ==================================================
+# DJANGO-DEBUG-TOOLBAR
+# ==================================================
+import socket
+hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
+INTERNAL_IPS = [ip[:-1] + "1" for ip in ips]
