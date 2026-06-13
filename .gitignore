@@ -79,6 +79,7 @@ target/
 
 
 ### Django ###
+docker-compose-prod.yml
 *.log
 *.pot
 *.pyc

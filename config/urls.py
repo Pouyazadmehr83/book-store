@@ -5,8 +5,8 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-  # Django admin
-  path('admin/', admin.site.urls),
+# Django admin
+    path('anything-but-admin/', admin.site.urls), # new
 
   # User management
   path('accounts/', include('allauth.urls')),
